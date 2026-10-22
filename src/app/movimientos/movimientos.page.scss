@@ -1,0 +1,327 @@
+
+ion-content {
+  --background: #f1f5f9;
+  --color: #1e293b;
+}
+
+.movimientos-container {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 30px 20px 60px;
+}
+
+/* ENCABEZADO */
+
+.volver {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2563eb;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 20px;
+
+  ion-icon {
+    font-size: 20px;
+  }
+}
+
+.encabezado {
+  margin-bottom: 28px;
+
+  h1 {
+    color: #1e293b;
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0 0 8px;
+  }
+
+  p {
+    color: #64748b;
+    margin: 0;
+    font-size: 14px;
+  }
+}
+
+/* RESUMEN */
+
+.resumen {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.resumen-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  ion-icon {
+    font-size: 30px;
+  }
+
+  h2 {
+    color: #1e293b;
+    font-size: 26px;
+    margin: 0 0 5px;
+  }
+
+  p {
+    color: #64748b;
+    font-size: 13px;
+    margin: 0;
+  }
+}
+
+.verde {
+  color: #059669;
+}
+
+.morado {
+  color: #7c3aed;
+}
+
+/* ACCIONES */
+
+.acciones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 22px;
+
+  h2 {
+    color: #1e293b;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  ion-button {
+    --background: #2563eb;
+    --color: white;
+    --border-radius: 12px;
+    text-transform: none;
+    height: 48px;
+    margin: 0;
+  }
+}
+
+/* FORMULARIO */
+
+.formulario-card {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  margin-bottom: 28px;
+  border: 1px solid #e2e8f0;
+
+  ion-item {
+    --background: #f8fafc;
+    --color: #1e293b;
+    --border-radius: 12px;
+    --padding-start: 16px;
+    --inner-padding-end: 16px;
+    --inner-border-width: 0;
+    margin-bottom: 15px;
+  }
+
+  ion-input,
+  ion-select {
+    --color: #1e293b;
+    --placeholder-color: #94a3b8;
+    --placeholder-opacity: 1;
+    --highlight-color-focused: #2563eb;
+    min-height: 54px;
+  }
+}
+
+.formulario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+
+  h2 {
+    color: #1e293b;
+    font-size: 20px;
+    margin: 0;
+  }
+
+  ion-icon {
+    color: #64748b;
+    font-size: 25px;
+    cursor: pointer;
+  }
+}
+
+.stock-disponible {
+  color: #64748b;
+  font-size: 14px;
+  margin: 10px 0 20px;
+
+  strong {
+    color: #1e293b;
+  }
+}
+
+.formulario-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  ion-button {
+    --background: #2563eb;
+    --color: white;
+    --border-radius: 10px;
+    text-transform: none;
+  }
+
+  ion-button[fill="outline"] {
+    --background: transparent;
+    --color: #2563eb;
+    --border-color: #2563eb;
+  }
+}
+
+/* HISTORIAL */
+
+.lista-movimientos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.movimiento-card {
+  background: white;
+  border-radius: 15px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #e2e8f0;
+}
+
+.movimiento-icono {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  ion-icon {
+    font-size: 24px;
+  }
+}
+
+.icono-entrada {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.icono-salida {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.movimiento-info {
+  flex: 1;
+  min-width: 0;
+
+  h3 {
+    color: #1e293b;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+
+  p {
+    color: #64748b;
+    font-size: 12px;
+    margin: 0 0 8px;
+  }
+
+  span {
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
+.movimiento-cantidad {
+  font-size: 19px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.texto-entrada {
+  color: #059669;
+}
+
+.texto-salida {
+  color: #dc2626;
+}
+
+.sin-movimientos {
+  background: white;
+  border-radius: 16px;
+  padding: 45px 20px;
+  text-align: center;
+
+  ion-icon {
+    color: #94a3b8;
+    font-size: 42px;
+  }
+
+  h3 {
+    color: #1e293b;
+    font-size: 17px;
+  }
+
+  p {
+    color: #64748b;
+    font-size: 13px;
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+  .movimientos-container {
+    padding: 24px 15px;
+  }
+
+  .acciones {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .resumen-card {
+    padding: 14px;
+    gap: 10px;
+
+    ion-icon {
+      font-size: 24px;
+    }
+
+    h2 {
+      font-size: 22px;
+    }
+  }
+
+  .movimiento-card {
+    padding: 13px;
+    gap: 10px;
+  }
+
+  .movimiento-icono {
+    width: 40px;
+    height: 40px;
+  }
+}

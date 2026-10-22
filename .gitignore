@@ -68,3 +68,20 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Variables de entorno y archivos privados
+.env
+.env.*
+!.env.example
+
+# Claves y certificados
+*.pem
+*.key
+*.p12
+*.p8
+*.keystore
+*.jks
+
+# Configuraciones locales privadas
+src/environments/environment.local.ts
+src/environments/environment.prod.local.ts

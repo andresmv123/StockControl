@@ -1,0 +1,328 @@
+
+<ion-content [fullscreen]="true">
+
+  <div class="productos-container">
+
+    <!-- ENCABEZADO -->
+    <div class="encabezado">
+
+      <div class="volver" (click)="volverDashboard()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+        <span>Dashboard</span>
+      </div>
+
+      <h1>Productos</h1>
+      <p>Administra el inventario de StockControl</p>
+
+    </div>
+
+    <!-- RESUMEN -->
+    <div class="resumen">
+
+      <div class="resumen-card">
+
+        <ion-icon
+          name="cube-outline"
+          class="azul">
+        </ion-icon>
+
+        <div>
+          <h2>{{ totalProductos }}</h2>
+          <p>Productos registrados</p>
+        </div>
+
+      </div>
+
+      <div class="resumen-card">
+
+        <ion-icon
+          name="warning-outline"
+          class="naranja">
+        </ion-icon>
+
+        <div>
+          <h2>{{ productosStockBajo }}</h2>
+          <p>Stock bajo (≤ 5)</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- BUSCADOR Y ACCIONES -->
+    <div class="herramientas">
+
+      <div class="buscador">
+
+        <ion-icon name="search-outline"></ion-icon>
+
+        <input
+          type="text"
+          placeholder="Buscar productos..."
+          [(ngModel)]="busqueda"
+        />
+
+      </div>
+
+      <!-- SOLO ADMINISTRADOR -->
+      @if (esAdministrador && !cargandoRol) {
+
+        <ion-button (click)="abrirFormulario()">
+
+          <ion-icon
+            slot="start"
+            name="add-outline">
+          </ion-icon>
+
+          Nuevo producto
+
+        </ion-button>
+
+      }
+
+    </div>
+
+    <!-- FORMULARIO: SOLO ADMINISTRADOR -->
+    @if (esAdministrador && mostrarFormulario) {
+
+      <div class="formulario-card">
+
+        <div class="formulario-header">
+
+          <h2>
+            {{ editando ? 'Editar producto' : 'Nuevo producto' }}
+          </h2>
+
+          <ion-icon
+            name="close-outline"
+            (click)="cerrarFormulario()">
+          </ion-icon>
+
+        </div>
+
+        <form (ngSubmit)="guardarProducto()">
+
+          <ion-item lines="none">
+
+            <ion-input
+              label="Nombre del producto"
+              labelPlacement="stacked"
+              placeholder="Ej. Teclado mecánico"
+              [(ngModel)]="productoActual.nombre"
+              name="nombre"
+              required>
+            </ion-input>
+
+          </ion-item>
+
+          <ion-item lines="none">
+
+            <ion-input
+              label="Categoría"
+              labelPlacement="stacked"
+              placeholder="Ej. Periféricos"
+              [(ngModel)]="productoActual.categoria"
+              name="categoria"
+              required>
+            </ion-input>
+
+          </ion-item>
+
+          <ion-item lines="none">
+
+            <ion-input
+              label="Precio (MXN)"
+              labelPlacement="stacked"
+              type="number"
+              min="0"
+              placeholder="0"
+              [(ngModel)]="productoActual.precio"
+              name="precio"
+              required>
+            </ion-input>
+
+          </ion-item>
+
+          <ion-item lines="none">
+
+            <ion-input
+              label="Cantidad disponible"
+              labelPlacement="stacked"
+              type="number"
+              min="0"
+              step="1"
+              placeholder="0"
+              [(ngModel)]="productoActual.stock"
+              name="stock"
+              required>
+            </ion-input>
+
+          </ion-item>
+
+          <div class="formulario-botones">
+
+            <ion-button
+              fill="outline"
+              type="button"
+              [disabled]="guardando"
+              (click)="cerrarFormulario()">
+              Cancelar
+            </ion-button>
+
+            <ion-button
+              type="submit"
+              [disabled]="guardando">
+
+              {{ guardando
+                ? 'Guardando...'
+                : editando
+                  ? 'Guardar cambios'
+                  : 'Agregar producto' }}
+
+            </ion-button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    }
+
+    <!-- LISTA DE PRODUCTOS -->
+    <div class="lista-header">
+
+      <h2>Inventario</h2>
+
+      <span>
+        {{ productosFiltrados.length }} productos
+      </span>
+
+    </div>
+
+    <div class="lista-productos">
+
+      @for (producto of productosFiltrados; track producto.id) {
+
+        <div class="producto-card">
+
+          <div class="producto-icono">
+            <ion-icon name="cube-outline"></ion-icon>
+          </div>
+
+          <div class="producto-info">
+
+            <h3>{{ producto.nombre }}</h3>
+
+            <p>{{ producto.categoria }}</p>
+
+            <div class="producto-detalles">
+
+              <!-- PRECIO ORIGINAL -->
+              <span class="precio">
+                {{ producto.precio | currency:'MXN' }}
+              </span>
+
+              <!-- STOCK -->
+              <span
+                class="stock"
+                [class.stock-bajo]="producto.stock <= 5">
+
+                Stock: {{ producto.stock }}
+
+              </span>
+
+            </div>
+
+            <!-- CONVERSIÓN CON API EXTERNA -->
+            @if (convertirADolares(producto.precio); as precioUSD) {
+
+              <div
+                style="
+                  margin-top: 7px;
+                  font-size: 12px;
+                  color: #64748b;
+                ">
+
+                ≈ {{ precioUSD | currency:'USD' }}
+                <span style="font-size: 11px;">
+                  (tipo de cambio actual)
+                </span>
+
+              </div>
+
+            } @else if (cargandoTipoCambio) {
+
+              <div
+                style="
+                  margin-top: 7px;
+                  font-size: 12px;
+                  color: #94a3b8;
+                ">
+
+                Consultando tipo de cambio...
+
+              </div>
+
+            }
+
+          </div>
+
+          <!-- ACCIONES: SOLO ADMINISTRADOR -->
+          @if (esAdministrador && !cargandoRol) {
+
+            <div class="producto-acciones">
+
+              <button
+                type="button"
+                class="editar"
+                aria-label="Editar producto"
+                (click)="editarProducto(producto)">
+
+                <ion-icon name="create-outline"></ion-icon>
+
+              </button>
+
+              <button
+                type="button"
+                class="eliminar"
+                aria-label="Eliminar producto"
+                (click)="eliminarProducto(producto)">
+
+                <ion-icon name="trash-outline"></ion-icon>
+
+              </button>
+
+            </div>
+
+          }
+
+        </div>
+
+      } @empty {
+
+        <div class="sin-productos">
+
+          <ion-icon name="cube-outline"></ion-icon>
+
+          @if (cargando) {
+
+            <h3>Cargando productos...</h3>
+            <p>Consultando el inventario.</p>
+
+          } @else {
+
+            <h3>No se encontraron productos</h3>
+            <p>Intenta otra búsqueda o consulta más tarde.</p>
+
+          }
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</ion-content>

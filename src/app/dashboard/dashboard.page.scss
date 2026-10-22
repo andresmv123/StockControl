@@ -1,0 +1,266 @@
+
+ion-content {
+  --background: #f1f5f9;
+  --color: #1e293b;
+}
+
+.dashboard-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 28px 20px 40px;
+}
+
+/* ENCABEZADO */
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.bienvenida {
+  color: #64748b;
+  font-size: 14px;
+  margin: 0 0 5px;
+}
+
+h1 {
+  color: #1e293b;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* FOTO DE PERFIL */
+.avatar {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  background: #dbeafe;
+  border: none;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+
+  ion-icon {
+    color: #2563eb;
+    font-size: 24px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 3px;
+  }
+}
+
+/* BANNER */
+.banner {
+  background: #2563eb;
+  color: white;
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 30px;
+
+  p {
+    font-size: 13px;
+    opacity: 0.85;
+    margin: 0 0 8px;
+  }
+
+  h2 {
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+
+  span {
+    font-size: 14px;
+    opacity: 0.9;
+  }
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 18px;
+}
+
+/* ESTADÍSTICAS */
+.estadisticas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+
+  ion-icon {
+    font-size: 25px;
+  }
+
+  h2 {
+    color: #1e293b;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 12px 0 5px;
+  }
+
+  p {
+    color: #64748b;
+    font-size: 13px;
+    margin: 0;
+  }
+}
+
+.azul { color: #2563eb; }
+.naranja { color: #d97706; }
+.verde { color: #059669; }
+.morado { color: #7c3aed; }
+.rojo { color: #dc2626; }
+
+/* MOVIMIENTOS */
+.movimientos {
+  background: white;
+  border-radius: 16px;
+  padding: 8px 18px;
+  border: 1px solid #e2e8f0;
+}
+
+.movimiento {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid #f1f5f9;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  > ion-icon {
+    font-size: 22px;
+    margin-left: auto;
+  }
+}
+
+.movimiento-icono {
+  width: 42px;
+  height: 42px;
+  background: #eff6ff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ion-icon {
+    color: #2563eb;
+    font-size: 22px;
+  }
+}
+
+.movimiento-info {
+  flex: 1;
+
+  h4 {
+    color: #1e293b;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 5px;
+  }
+
+  p {
+    color: #64748b;
+    font-size: 12px;
+    margin: 0;
+  }
+}
+
+/* MENÚ INFERIOR */
+ion-footer {
+  background: white;
+  border-top: 1px solid #e2e8f0;
+}
+
+.menu-inferior {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 5px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  color: #94a3b8;
+  font-size: 11px;
+
+  ion-icon {
+    font-size: 23px;
+  }
+
+  &.activo {
+    color: #2563eb;
+    font-weight: 600;
+  }
+}
+
+/* MENSAJE CUANDO NO HAY MOVIMIENTOS */
+.sin-movimientos {
+  text-align: center;
+  padding: 35px 20px;
+
+  ion-icon {
+    font-size: 40px;
+    color: #94a3b8;
+    margin-bottom: 12px;
+  }
+
+  h4 {
+    color: #1e293b;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+
+  p {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 24px 16px;
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+
+  .banner {
+    padding: 22px;
+  }
+}

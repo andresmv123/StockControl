@@ -1,0 +1,164 @@
+
+<ion-content [fullscreen]="true">
+
+  <div class="dashboard-container">
+
+    <!-- ENCABEZADO -->
+    <div class="encabezado">
+      <div>
+        <p class="bienvenida">Bienvenido a</p>
+        <h1>StockControl</h1>
+      </div>
+
+      <!-- FOTO DE PERFIL -->
+      <button
+        type="button"
+        class="avatar"
+        (click)="irPerfil()"
+        aria-label="Abrir mi perfil">
+
+        @if (fotoPerfil) {
+          <img
+            [src]="fotoPerfil"
+            alt="Mi foto de perfil"
+          />
+        } @else {
+          <ion-icon name="person-outline"></ion-icon>
+        }
+
+      </button>
+    </div>
+
+    <!-- BANNER -->
+    <div class="banner">
+      <p>Resumen de inventario</p>
+      <h2>Panel principal</h2>
+      <span>Administra tus productos fácilmente.</span>
+    </div>
+
+    <!-- ESTADÍSTICAS -->
+    <h3>Estadísticas generales</h3>
+
+    <div class="estadisticas">
+
+      <div class="stat-card">
+        <ion-icon
+          name="cube-outline"
+          class="azul">
+        </ion-icon>
+
+        <h2>{{ totalProductos }}</h2>
+        <p>Productos</p>
+      </div>
+
+      <div class="stat-card">
+        <ion-icon
+          name="warning-outline"
+          class="naranja">
+        </ion-icon>
+
+        <h2>{{ stockBajo }}</h2>
+        <p>Stock bajo</p>
+      </div>
+
+      <div class="stat-card">
+        <ion-icon
+          name="arrow-down-outline"
+          class="verde">
+        </ion-icon>
+
+        <h2>{{ entradas }}</h2>
+        <p>Entradas</p>
+      </div>
+
+      <div class="stat-card">
+        <ion-icon
+          name="arrow-up-outline"
+          class="morado">
+        </ion-icon>
+
+        <h2>{{ salidas }}</h2>
+        <p>Salidas</p>
+      </div>
+
+    </div>
+
+    <!-- MOVIMIENTOS -->
+    <h3>Movimientos recientes</h3>
+
+    <div class="movimientos">
+
+      @for (movimiento of movimientos; track movimiento.id) {
+
+        <div class="movimiento">
+
+          <div class="movimiento-icono">
+            <ion-icon name="cube-outline"></ion-icon>
+          </div>
+
+          <div class="movimiento-info">
+            <h4>{{ movimiento.producto }}</h4>
+
+            <p>
+              {{ movimiento.tipo }} ·
+              {{ movimiento.cantidad }} unidades
+            </p>
+          </div>
+
+          <ion-icon
+            [name]="movimiento.tipo === 'Entrada'
+              ? 'arrow-down-outline'
+              : 'arrow-up-outline'"
+            [class.verde]="movimiento.tipo === 'Entrada'"
+            [class.rojo]="movimiento.tipo === 'Salida'">
+          </ion-icon>
+
+        </div>
+
+      } @empty {
+
+        <div class="sin-movimientos">
+          <ion-icon name="swap-horizontal-outline"></ion-icon>
+
+          <h4>Sin movimientos registrados</h4>
+
+          <p>
+            Aquí aparecerán las entradas y salidas
+            de productos cuando las registremos.
+          </p>
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</ion-content>
+
+<!-- MENÚ INFERIOR -->
+<ion-footer>
+  <div class="menu-inferior">
+
+    <div class="menu-item activo">
+      <ion-icon name="home-outline"></ion-icon>
+      <span>Inicio</span>
+    </div>
+
+    <div class="menu-item" (click)="irProductos()">
+      <ion-icon name="cube-outline"></ion-icon>
+      <span>Productos</span>
+    </div>
+
+    <div class="menu-item" (click)="irMovimientos()">
+      <ion-icon name="swap-horizontal-outline"></ion-icon>
+      <span>Movimientos</span>
+    </div>
+
+    <div class="menu-item" (click)="irPerfil()">
+      <ion-icon name="person-outline"></ion-icon>
+      <span>Perfil</span>
+    </div>
+
+  </div>
+</ion-footer>

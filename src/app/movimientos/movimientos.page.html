@@ -1,0 +1,229 @@
+
+<ion-content [fullscreen]="true">
+
+  <div class="movimientos-container">
+
+    <!-- ENCABEZADO -->
+    <div class="encabezado">
+
+      <div class="volver" (click)="volverDashboard()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+        <span>Dashboard</span>
+      </div>
+
+      <h1>Movimientos</h1>
+      <p>Registra entradas y salidas de inventario</p>
+
+    </div>
+
+    <!-- ESTADÍSTICAS -->
+    <div class="resumen">
+
+      <div class="resumen-card">
+        <ion-icon
+          name="arrow-down-outline"
+          class="verde">
+        </ion-icon>
+
+        <div>
+          <h2>{{ totalEntradas }}</h2>
+          <p>Entradas registradas</p>
+        </div>
+      </div>
+
+      <div class="resumen-card">
+        <ion-icon
+          name="arrow-up-outline"
+          class="morado">
+        </ion-icon>
+
+        <div>
+          <h2>{{ totalSalidas }}</h2>
+          <p>Salidas registradas</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTÓN NUEVO MOVIMIENTO -->
+    <div class="acciones">
+
+      <h2>Historial de movimientos</h2>
+
+      <ion-button (click)="abrirFormulario()">
+        <ion-icon
+          slot="start"
+          name="add-outline">
+        </ion-icon>
+        Nuevo movimiento
+      </ion-button>
+
+    </div>
+
+    <!-- FORMULARIO -->
+    @if (mostrarFormulario) {
+
+      <div class="formulario-card">
+
+        <div class="formulario-header">
+          <h2>Registrar movimiento</h2>
+
+          <ion-icon
+            name="close-outline"
+            (click)="cerrarFormulario()">
+          </ion-icon>
+        </div>
+
+        <form (ngSubmit)="registrarMovimiento()">
+
+          <ion-item lines="none">
+            <ion-select
+              label="Producto"
+              labelPlacement="stacked"
+              placeholder="Selecciona un producto"
+              [(ngModel)]="productoSeleccionado"
+              name="producto"
+              interface="alert">
+
+              @for (producto of productos; track producto.id) {
+                <ion-select-option [value]="producto.id">
+                  {{ producto.nombre }}
+                  (Stock: {{ producto.stock }})
+                </ion-select-option>
+              }
+
+            </ion-select>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-select
+              label="Tipo de movimiento"
+              labelPlacement="stacked"
+              [(ngModel)]="tipoMovimiento"
+              name="tipo"
+              interface="alert">
+
+              <ion-select-option value="Entrada">
+                Entrada
+              </ion-select-option>
+
+              <ion-select-option value="Salida">
+                Salida
+              </ion-select-option>
+
+            </ion-select>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-input
+              label="Cantidad"
+              labelPlacement="stacked"
+              type="number"
+              min="1"
+              step="1"
+              placeholder="Ingresa la cantidad"
+              [(ngModel)]="cantidad"
+              name="cantidad"
+              required>
+            </ion-input>
+          </ion-item>
+
+          @if (productoActual) {
+            <p class="stock-disponible">
+              Stock disponible:
+              <strong>{{ productoActual.stock }} unidades</strong>
+            </p>
+          }
+
+          <div class="formulario-botones">
+
+            <ion-button
+              type="button"
+              fill="outline"
+              (click)="cerrarFormulario()">
+              Cancelar
+            </ion-button>
+
+            <ion-button type="submit">
+              Registrar movimiento
+            </ion-button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    }
+
+    <!-- HISTORIAL -->
+    <div class="lista-movimientos">
+
+      @for (movimiento of movimientos; track movimiento.id) {
+
+        <div class="movimiento-card">
+
+          <div
+            class="movimiento-icono"
+            [class.icono-entrada]="movimiento.tipo === 'Entrada'"
+            [class.icono-salida]="movimiento.tipo === 'Salida'">
+
+            <ion-icon
+              [name]="movimiento.tipo === 'Entrada'
+                ? 'arrow-down-outline'
+                : 'arrow-up-outline'">
+            </ion-icon>
+
+          </div>
+
+          <div class="movimiento-info">
+
+            <h3>{{ movimiento.producto }}</h3>
+
+            <p>
+              {{ movimiento.fecha | date:'dd/MM/yyyy, HH:mm' }}
+            </p>
+
+            <span
+              [class.texto-entrada]="movimiento.tipo === 'Entrada'"
+              [class.texto-salida]="movimiento.tipo === 'Salida'">
+              {{ movimiento.tipo }}
+            </span>
+
+          </div>
+
+          <div
+            class="movimiento-cantidad"
+            [class.texto-entrada]="movimiento.tipo === 'Entrada'"
+            [class.texto-salida]="movimiento.tipo === 'Salida'">
+
+            {{ movimiento.tipo === 'Entrada' ? '+' : '-' }}
+            {{ movimiento.cantidad }}
+
+          </div>
+
+        </div>
+
+      } @empty {
+
+        <div class="sin-movimientos">
+
+          <ion-icon name="swap-horizontal-outline"></ion-icon>
+
+          <h3>No hay movimientos registrados</h3>
+
+          <p>
+            Registra tu primera entrada o salida
+            de productos.
+          </p>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</ion-content>
+

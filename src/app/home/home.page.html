@@ -1,20 +1,52 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="login-container">
+    <div class="login-card">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <div class="logo">
+        <ion-icon name="cube-outline"></ion-icon>
+      </div>
+
+      <h1>StockControl</h1>
+      <p class="subtitle">Control de inventario inteligente</p>
+
+      <h2>Iniciar sesión</h2>
+
+      <form (ngSubmit)="iniciarSesion()">
+        <ion-item lines="none">
+          <ion-input
+            label="Correo electrónico"
+            labelPlacement="stacked"
+            type="email"
+            placeholder="correo@ejemplo.com"
+            [(ngModel)]="correo"
+            name="correo"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-input
+            label="Contraseña"
+            labelPlacement="stacked"
+            type="password"
+            placeholder="Ingresa tu contraseña"
+            [(ngModel)]="contrasena"
+            name="contrasena"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-button expand="block" type="submit">
+          Iniciar sesión
+        </ion-button>
+      </form>
+
+      <p class="registro">
+        ¿No tienes cuenta?
+        <a (click)="registrarse()">Regístrate</a>
+      </p>
+
+    </div>
   </div>
 </ion-content>

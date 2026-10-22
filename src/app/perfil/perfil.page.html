@@ -1,0 +1,110 @@
+
+<ion-content [fullscreen]="true">
+
+  <div class="perfil-container">
+
+    <div class="encabezado">
+      <div class="volver" (click)="volverDashboard()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+        <span>Dashboard</span>
+      </div>
+
+      <h1>Mi perfil</h1>
+      <p>Información de tu cuenta de StockControl</p>
+    </div>
+
+    <div class="perfil-card">
+
+      <div class="avatar">
+        @if (fotoPerfil) {
+          <img
+            [src]="fotoPerfil"
+            alt="Foto de perfil"
+          />
+        } @else {
+          <ion-icon name="person-outline"></ion-icon>
+        }
+      </div>
+
+      <label
+        class="cambiar-foto"
+        for="archivo-foto">
+
+        <ion-icon name="camera-outline"></ion-icon>
+
+        {{ subiendoFoto ? 'Guardando foto...' : 'Cambiar foto' }}
+
+      </label>
+
+      <input
+        id="archivo-foto"
+        type="file"
+        accept="image/jpeg,image/png,image/webp"
+        (change)="seleccionarFoto($event)"
+        [disabled]="subiendoFoto"
+        hidden
+      />
+
+      <h2>{{ nombre }}</h2>
+      <span class="rol">{{ rol }}</span>
+
+      <div class="separador"></div>
+
+      <div class="informacion">
+
+        <div class="info-item">
+          <div class="info-icono">
+            <ion-icon name="person-outline"></ion-icon>
+          </div>
+
+          <div>
+            <p>Nombre completo</p>
+            <h3>{{ nombre }}</h3>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icono">
+            <ion-icon name="mail-outline"></ion-icon>
+          </div>
+
+          <div>
+            <p>Correo electrónico</p>
+            <h3>{{ correo }}</h3>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-icono">
+            <ion-icon name="shield-checkmark-outline"></ion-icon>
+          </div>
+
+          <div>
+            <p>Rol de usuario</p>
+            <h3>{{ rol }}</h3>
+          </div>
+        </div>
+
+      </div>
+
+      <ion-button
+        expand="block"
+        class="cerrar-sesion"
+        (click)="cerrarSesion()">
+
+        <ion-icon
+          slot="start"
+          name="log-out-outline">
+        </ion-icon>
+
+        Cerrar sesión
+
+      </ion-button>
+
+    </div>
+
+    <p class="version">StockControl · Versión 1.0.0</p>
+
+  </div>
+
+</ion-content>

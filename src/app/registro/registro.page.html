@@ -1,0 +1,82 @@
+
+<ion-content [fullscreen]="true">
+  <div class="registro-container">
+    <div class="registro-card">
+
+      <div class="volver" (click)="volverLogin()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+        <span>Volver al inicio</span>
+      </div>
+
+      <div class="logo">
+        <ion-icon name="person-add-outline"></ion-icon>
+      </div>
+
+      <h1>Crear cuenta</h1>
+      <p class="subtitle">
+        Regístrate para utilizar StockControl
+      </p>
+
+      <form (ngSubmit)="crearCuenta()">
+
+        <ion-item lines="none">
+          <ion-input
+            label="Nombre completo"
+            labelPlacement="stacked"
+            placeholder="Ingresa tu nombre"
+            [(ngModel)]="nombre"
+            name="nombre"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-input
+            label="Correo electrónico"
+            labelPlacement="stacked"
+            type="email"
+            placeholder="correo@ejemplo.com"
+            [(ngModel)]="correo"
+            name="correo"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-input
+            label="Contraseña"
+            labelPlacement="stacked"
+            type="password"
+            placeholder="Mínimo 6 caracteres"
+            [(ngModel)]="contrasena"
+            name="contrasena"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-input
+            label="Confirmar contraseña"
+            labelPlacement="stacked"
+            type="password"
+            placeholder="Repite tu contraseña"
+            [(ngModel)]="confirmarContrasena"
+            name="confirmarContrasena"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-button expand="block" type="submit">
+          Crear cuenta
+        </ion-button>
+
+      </form>
+
+      <p class="login-link">
+        ¿Ya tienes cuenta?
+        <a (click)="volverLogin()">Inicia sesión</a>
+      </p>
+
+    </div>
+  </div>
+</ion-content>
