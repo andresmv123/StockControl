@@ -1,0 +1,28 @@
+
+name: CI - Practica de inventario
+
+on:
+  push:
+    branches:
+      - practica/ci-semana1
+  pull_request:
+    branches:
+      - practica/ci-semana1
+  workflow_dispatch:
+
+jobs:
+  pruebas:
+    name: Validar inventario
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Ejecutar pruebas automaticas
+        run: node --test practica-ci/inventario.test.js
