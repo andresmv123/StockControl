@@ -28,3 +28,8 @@ test('Rechaza un stock inicial inválido', () => {
     /entero no negativo/
   );
 });
+
+
+test('Prueba controlada de deteccion de errores', () => {
+  assert.equal(calcularStockRestante(10, 3), 8);
+});
