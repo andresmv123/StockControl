@@ -30,6 +30,6 @@ test('Rechaza un stock inicial inválido', () => {
 });
 
 
-test('Prueba controlada de deteccion de errores', () => {
-  assert.equal(calcularStockRestante(10, 3), 8);
+test('Verifica el resultado correcto despues de corregir el error', () => {
+  assert.equal(calcularStockRestante(10, 3), 7);
 });
