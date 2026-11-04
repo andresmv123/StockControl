@@ -159,7 +159,7 @@ export class ProductosPage {
     }
   }
 
-  // CONSULTAR API EXTERNA
+  // CONSULTAR API EXTERNA  
   async cargarTipoCambio(): Promise<void> {
 
     const versionActual = ++this.versionTipoCambio;
@@ -178,14 +178,25 @@ export class ProductosPage {
 
       this.tasaDolar = tasa;
 
-    } catch (error) {
+    } catch (error: unknown) {
 
       if (versionActual !== this.versionTipoCambio) {
         return;
       }
 
       console.error('Error al consultar tipo de cambio:', error);
+
       this.tasaDolar = null;
+
+      const mensaje =
+        error instanceof Error
+          ? error.message
+          : 'Ocurrió un error desconocido al consultar la API.';
+
+      await this.mostrarAlerta(
+        'Tipo de cambio no disponible',
+        mensaje + ' Los precios en pesos mexicanos seguirán disponibles.'
+      );
 
     } finally {
 
@@ -194,6 +205,7 @@ export class ProductosPage {
       }
     }
   }
+
 
   // CONVERTIR PRECIO MXN A USD
   convertirADolares(precio: number): number | null {
