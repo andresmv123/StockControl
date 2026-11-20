@@ -31,6 +31,8 @@ jobs:
       - name: Analizar calidad del codigo
         run: npm run lint
 
+      - name: Verificar tipos TypeScript
+        run: npx tsc --noEmit -p tsconfig.app.json
+
       - name: Compilar aplicacion
         run: npm run build
-
