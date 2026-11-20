@@ -1,0 +1,32 @@
+
+name: CI - StockControl Semana 1
+
+on:
+  push:
+    branches:
+      - entrega/semana1-ci
+  pull_request:
+    branches:
+      - entrega/semana1-ci
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Compilar StockControl
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Compilar aplicacion
+        run: npm run build
