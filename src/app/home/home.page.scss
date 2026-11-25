@@ -145,3 +145,17 @@ ion-button {
     font-size: 21px;
   }
 }
+/* INFORMACION DE VERSION */
+.version-info {
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid #e2e8f0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  color: #64748b;
+  font-size: 12px;
+}
