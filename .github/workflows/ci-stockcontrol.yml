@@ -1,13 +1,12 @@
-
-name: CI - StockControl Semana 1
+name: CI - StockControl Semana 2
 
 on:
   push:
     branches:
-      - entrega/semana1-ci
+      - entrega/semana2-cd
   pull_request:
     branches:
-      - entrega/semana1-ci
+      - entrega/semana2-cd
   workflow_dispatch:
 
 jobs:
