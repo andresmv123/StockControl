@@ -1,12 +1,12 @@
-name: CI/CD - StockControl Semana 2
+name: CI/CD - StockControl Semana 3
 
 on:
   push:
     branches:
-      - entrega/semana2-cd
+      - entrega/semana3-monitoreo
   pull_request:
     branches:
-      - entrega/semana2-cd
+      - entrega/semana3-monitoreo
   workflow_dispatch:
 
 jobs:
@@ -39,7 +39,7 @@ jobs:
   deploy:
     name: Desplegar StockControl en Vercel
     needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/entrega/semana2-cd'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/entrega/semana3-monitoreo'
     runs-on: ubuntu-latest
 
     env:
